@@ -5,6 +5,7 @@ import android.os.RemoteException;
 import android.util.Log;
 
 import com.example.demolecturatarjeta.ConsumeData;
+import com.example.demolecturatarjeta.InformacionActivity;
 import com.example.demolecturatarjeta.MainActivity;
 import com.example.demolecturatarjeta.Utils;
 import com.example.demolecturatarjeta.api.SmartPosApplication;
@@ -44,6 +45,7 @@ public class CheckCardListenerSub extends AidlCheckCardListener.Stub {
             cancelCheckCard();
             CardManager.getInstance().callBackError(CARD_SEARCH_ERROR_REASON_MAG_EMV);
         } else {
+            SmartPosApplication.getApp().mConsumeData = new ConsumeData();
             SmartPosApplication.getApp().mConsumeData.setCardType(ConsumeData.CARD_TYPE_MAG);
             SmartPosApplication.getApp().mConsumeData.setCardno(cardNo);
             SmartPosApplication.getApp().mConsumeData.setExpiryData(data.getExpiryDate());
@@ -53,7 +55,7 @@ public class CheckCardListenerSub extends AidlCheckCardListener.Stub {
                 track3 = track3.replace("=", "D");
                 SmartPosApplication.getApp().mConsumeData.setThirdTrackData(track3);
             }
-            CardManager.getInstance().startActivity(mContext, null, MainActivity.class);
+            CardManager.getInstance().startActivity(mContext, null, InformacionActivity.class);
         }
     }
 

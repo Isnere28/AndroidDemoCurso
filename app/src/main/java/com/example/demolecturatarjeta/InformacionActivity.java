@@ -22,11 +22,12 @@ public class InformacionActivity extends AppCompatActivity {
 
         informacionTextView.setText(SmartPosApplication.getApp().mConsumeData.getCardno());
 
-        byte[] num = SmartPosApplication.getApp().mConsumeData.getICData();
+        //byte[] num = SmartPosApplication.getApp().mConsumeData.getSecondTrackData();
 
 
 
-        dateTextView.setText(BCDASCII.bytesToHexString(num));
+        //dateTextView.setText(BCDASCII.bytesToHexString(num));
+        dateTextView.setText(SmartPosApplication.getApp().mConsumeData.getSecondTrackData());
     }
 
 

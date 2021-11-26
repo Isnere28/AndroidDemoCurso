@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DemoLecturaTarjeta">
         <activity
+            android:name=".Print"
+            android:exported="false" />
+        <activity
             android:name=".LecturaTarjeta"
             android:exported="false" />
         <activity

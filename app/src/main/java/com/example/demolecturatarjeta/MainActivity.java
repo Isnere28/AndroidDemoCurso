@@ -27,7 +27,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.button:
                 Toast.makeText(this,"Abrir pantalla de lectura", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(this, LecturaTarjeta.class));
+                startActivity(new Intent(this, Print.class));
+
                 break;
         }
     }
