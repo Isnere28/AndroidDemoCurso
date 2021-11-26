@@ -20,13 +20,13 @@ import com.topwise.cloudpos.aidl.printer.ImageUnit;
 import com.topwise.cloudpos.aidl.printer.PrintTemplate;
 import com.topwise.cloudpos.aidl.printer.TextUnit;
 
-public class Print extends DeviceService implements View.OnClickListener {
+public class PrintActivity extends DeviceService implements View.OnClickListener {
 
     private Button buttonText;
     private Button buttonImage;
     private ImageView imagen;
     public static AidlPrinter printerDev;
-    private static final String TAG = "Prueba - Print - Clase: PrintActivity";
+    private static final String TAG = "Prueba - PrintActivity - Clase: PrintActivity";
     private String lineasdeimpresion;
     private String[] cadenadeimpresion;
 

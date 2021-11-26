@@ -10,7 +10,7 @@ import com.example.demolecturatarjeta.api.DeviceService;
 import com.example.demolecturatarjeta.card.CardManager;
 import com.topwise.cloudpos.aidl.AidlDeviceService;
 
-public class LecturaTarjeta extends DeviceService {
+public class LecturaTarjetaActivity extends DeviceService {
 
     private static final String TAG = "Prueba - Lectura de tarjeta - Clase: LecturaTarjetaActivity";
 

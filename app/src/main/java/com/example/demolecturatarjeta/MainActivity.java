@@ -10,24 +10,32 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener  {
 
-    private Button button;
+    private Button button_lectura;
+    private Button button_imprimir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button = findViewById(R.id.button);
+        button_lectura = findViewById(R.id.button_lectura);
+        button_imprimir = findViewById(R.id.button_imprimir);
 
-        button.setOnClickListener(this);
+        button_lectura.setOnClickListener(this);
+        button_imprimir.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.button:
+            case R.id.button_lectura:
                 Toast.makeText(this,"Abrir pantalla de lectura", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(this, Print.class));
+                startActivity(new Intent(this, LecturaTarjetaActivity.class));
+
+                break;
+            case R.id.button_imprimir:
+                //Toast.makeText(this,"Abrir pantalla de lectura", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(this, PrintActivity.class));
 
                 break;
         }
