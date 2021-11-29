@@ -41,19 +41,24 @@ public class CheckCardListenerSub extends AidlCheckCardListener.Stub {
         if (cardNo == null || isTrack2Error(track2)) {
             cancelCheckCard();
             CardManager.getInstance().callBackError(CARD_SEARCH_ERROR_REASON_MAG_READ);
-        } else if (isEmvCard(track2)) {
-            cancelCheckCard();
-            CardManager.getInstance().callBackError(CARD_SEARCH_ERROR_REASON_MAG_EMV);
-        } else {
-            SmartPosApplication.getApp().mConsumeData = new ConsumeData();
-            SmartPosApplication.getApp().mConsumeData.setCardType(ConsumeData.CARD_TYPE_MAG);
-            SmartPosApplication.getApp().mConsumeData.setCardno(cardNo);
-            SmartPosApplication.getApp().mConsumeData.setExpiryData(data.getExpiryDate());
-            track2 = track2.replace("=", "D");
-            SmartPosApplication.getApp().mConsumeData.setSecondTrackData(track2);
-            if (track3 != null) {
-                track3 = track3.replace("=", "D");
-                SmartPosApplication.getApp().mConsumeData.setThirdTrackData(track3);
+            //Aqui va la validacion de que pasaron los 3 intentos de lectura de chip y permite la lectura por banda
+        } else
+        if(MainActivity.tipodelectura == "Call back"){
+            if (isEmvCard(track2)) {
+                cancelCheckCard();
+                CardManager.getInstance().callBackError(CARD_SEARCH_ERROR_REASON_MAG_EMV);
+
+            } else {
+                SmartPosApplication.getApp().mConsumeData = new ConsumeData();
+                SmartPosApplication.getApp().mConsumeData.setCardType(ConsumeData.CARD_TYPE_MAG);
+                SmartPosApplication.getApp().mConsumeData.setCardno(cardNo);
+                SmartPosApplication.getApp().mConsumeData.setExpiryData(data.getExpiryDate());
+                track2 = track2.replace("=", "D");
+                SmartPosApplication.getApp().mConsumeData.setSecondTrackData(track2);
+                if (track3 != null) {
+                    track3 = track3.replace("=", "D");
+                    SmartPosApplication.getApp().mConsumeData.setThirdTrackData(track3);
+                }
             }
             CardManager.getInstance().startActivity(mContext, null, InformacionActivity.class);
         }
@@ -128,9 +133,14 @@ public class CheckCardListenerSub extends AidlCheckCardListener.Stub {
             int index = track2.indexOf("=");
             String subTrack2 = track2.substring(index);
 
-            if (subTrack2.charAt(5) == '2' || subTrack2.charAt(5) == '6') {
-                Log.i(TAG, "isEmvCard: true");
-                return true;
+            if(MainActivity.tipodelectura != "Call back") {
+                if (subTrack2.charAt(5) == '2' || subTrack2.charAt(5) == '6') {
+                    Log.i(TAG, "isEmvCard: true");
+                    return true;
+                }
+            } else {
+                Log.i(TAG, "isEmvCard: false");
+                return false;
             }
         }
         Log.i(TAG, "isEmvCard: false");

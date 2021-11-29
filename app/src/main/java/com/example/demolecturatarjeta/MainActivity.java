@@ -12,6 +12,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Button button_lectura;
     private Button button_imprimir;
+    public static int intentoLectura;
+    public static String tipodelectura;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +25,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         button_lectura.setOnClickListener(this);
         button_imprimir.setOnClickListener(this);
+        tipodelectura = "chip";
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.button_lectura:
-                Toast.makeText(this,"Abrir pantalla de lectura", Toast.LENGTH_LONG).show();
+
+                //Toast.makeText(this,"Abrir pantalla de lectura", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(this, LecturaTarjetaActivity.class));
 
                 break;

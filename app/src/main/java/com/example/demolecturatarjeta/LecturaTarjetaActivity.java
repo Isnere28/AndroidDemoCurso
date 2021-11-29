@@ -3,6 +3,7 @@ package com.example.demolecturatarjeta;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -33,7 +34,9 @@ public class LecturaTarjetaActivity extends DeviceService {
     private final CardManager.CardExceptionCallBack exceptionCallBack = new CardManager.CardExceptionCallBack() {
         @Override
         public void callBackTimeOut() {
-
+            Intent intent = new Intent(getApplicationContext(), MensajeActivity.class);
+            intent.putExtra("Mensaje", "Se cumplio el tiempo de lectura");
+            startActivity(intent);
         }
 
         @SuppressLint("LongLogTag")
@@ -41,6 +44,20 @@ public class LecturaTarjetaActivity extends DeviceService {
         public void callBackError(int errorCode) {
             Log.d(TAG, "callBackError errorCode : " + errorCode);
             //mHandle.sendEmptyMessage(errorCode);
+            if (MainActivity.intentoLectura == 3){
+                MainActivity.intentoLectura = 0;
+                MainActivity.tipodelectura = "Call back";
+                Intent intent = new Intent(getApplicationContext(), MensajeActivity.class);
+                intent.putExtra("Mensaje", "Se cumplieron los 3 intentos");
+                startActivity(intent);
+            } else {
+                MainActivity.intentoLectura+=1;
+                MainActivity.tipodelectura = "chip";
+                Intent intent = new Intent(getApplicationContext(), MensajeActivity.class);
+                intent.putExtra("Mensaje", "Intente de nuevo");
+                startActivity(intent);
+
+            }
         }
 
         @Override
